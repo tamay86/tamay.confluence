@@ -1,0 +1,45 @@
+---
+# tasks file for tamay.confluence
+
+- name: "Create /root/packages/confluence"
+  file:
+    state: directory
+    path: /root/packages/confluence
+    owner: root
+    group: root
+
+- name: "Download confluence installer"
+  get_url:
+    url: "{{ confluence_installer_url }}"
+    dest: /root/packages/confluence/atlassian-confluence-{{ confluence_version }}-x64.bin
+    owner: root
+    group: root
+    mode: 0750
+
+- name: "Copy response.varfile"
+  template:
+    src: response.varfile.j2
+    dest: /root/packages/confluence/response.varfile
+    owner: root
+    group: root
+    mode: 0640
+
+- name: "Execute installer"
+  shell: /root/packages/confluence/atlassian-confluence-{{ confluence_version }}-x64.bin -q -varfile /root/packages/confluence/response.varfile
+  args:
+    creates: "{{ confluence_base_dir }}/README.md"
+
+- name: "Copy systemd unit file for confluence"
+  template:
+    src: confluence.service.j2
+    dest: /etc/systemd/system/confluence.service
+    owner: root
+    group: root
+    mode: 0664
+  notify: "daemon_reload"
+
+- name: "Start confluence"
+  service:
+    name: confluence
+    state: started
+    enabled: yes

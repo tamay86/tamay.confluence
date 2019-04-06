@@ -1,0 +1,7 @@
+---
+# defaults file for tamay.confluence
+
+confluence_version: 6.15.2
+
+confluence_base_dir: /opt/atlassian/confluence
+confluence_data_dir: /var/atlassian/application-data/confluence

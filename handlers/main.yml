@@ -1,0 +1,7 @@
+---
+# handlers file for tamay.confluence
+
+- name: "Reload systemd"
+  systemd:
+    daemon-reload: yes
+  listen: "daemon_reload"

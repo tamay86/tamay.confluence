@@ -1,0 +1,4 @@
+---
+# vars file for tamay.confluence
+
+confluence_installer_url: https://www.atlassian.com/software/confluence/downloads/binary/atlassian-confluence-{{ confluence_version }}-x64.bin
