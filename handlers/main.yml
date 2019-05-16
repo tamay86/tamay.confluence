@@ -4,4 +4,11 @@
 - name: "Reload systemd"
   systemd:
     daemon-reload: yes
-  listen: "daemon_reload"
+  listen: daemon_reload
+
+- name: "Restart confluence"
+  service:
+    name: confluence
+    state: restarted
+    enabled: yes
+  listen: restart_confluence

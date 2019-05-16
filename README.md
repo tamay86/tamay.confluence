@@ -25,6 +25,16 @@ Path where Confluence will be installed.
 
 Path where Confluence will keep it's application data.
 
+    confluence_server_connector:
+      name: default
+      proxyName: "{{ ansible_fqdn }}"
+      keystorePass: "<MY_CERTIFICATE_PASSWORD>"
+
+Configures the connector in ```server.xml```. Possible values are ```default```, ```http-proxy```, ```http-direct``` and ```https-proxy```. For explanation see contents of ```server.xml```.
+Most commonly used is **https-proxy** for usage with a reverse proxy, that terminates SSL, such as *httpd*, *nginx*, or *haproxy*.
+
+**proxyName** is only used with ```http-proxy``` and ```https-proxy```.
+**keystorePass** is only used with ```http-direct```.
 
 Dependencies
 ------------

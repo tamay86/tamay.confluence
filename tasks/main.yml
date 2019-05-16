@@ -29,6 +29,15 @@
   args:
     creates: "{{ confluence_base_dir }}/README.md"
 
+- name: "Copy server.xml"
+  template:
+    src: server.xml
+    dest: "{{ confluence_base_dir }}/conf/server.xml"
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart_confluence
+
 - name: "Copy systemd unit file for confluence"
   template:
     src: confluence.service.j2
@@ -36,10 +45,4 @@
     owner: root
     group: root
     mode: 0664
-  notify: "daemon_reload"
-
-- name: "Start confluence"
-  service:
-    name: confluence
-    state: started
-    enabled: yes
+  notify: daemon_reload

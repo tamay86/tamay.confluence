@@ -1,7 +1,20 @@
 ---
 # defaults file for tamay.confluence
 
+# Version of confluence to download.
+# See https://de.atlassian.com/software/confluence/download
 confluence_version: 6.15.2
 
+# Path of confluence install dir
 confluence_base_dir: /opt/atlassian/confluence
+
+# Path of confluence data dir
 confluence_data_dir: /var/atlassian/application-data/confluence
+
+# Connector to use in server.xml
+# Possible connectors are:
+# 'default', 'http-proxy', 'https-direct', 'https-proxy'
+confluence_server_connector:
+  name: default
+  proxyName: "{{ ansible_fqdn }}"
+  keystorePass: "<MY_CERTIFICATE_PASSWORD>"
