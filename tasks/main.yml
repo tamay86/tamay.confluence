@@ -31,7 +31,7 @@
 
 - name: "Copy server.xml"
   template:
-    src: server.xml
+    src: server.xml.j2
     dest: "{{ confluence_base_dir }}/conf/server.xml"
     owner: root
     group: root
